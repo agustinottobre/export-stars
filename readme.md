@@ -34,9 +34,22 @@ uv run export_stars.py --user defunkt > stars.csv
 
 ### With GitHub token (for higher rate limits)
 
+Using a token increases your rate limit from **60 requests/hour** to **5,000 requests/hour**.
+
 ```bash
 GH_USER=defunkt uv run export_stars.py --github-token YOUR_TOKEN > stars.csv
 ```
+
+#### Getting a GitHub Token
+
+Since this tool only reads public data, no special permissions are required.
+
+1. Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens/new)
+2. Fill in the **Note** field (e.g., `export-stars`)
+3. Select an **Expiration** date
+4. **Scopes**: Leave all unchecked (no permissions needed for public data)
+5. Click **Generate token**
+6. Copy the token immediately (you won't see it again)
 
 ### Adjust rate limiting delay
 

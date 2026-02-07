@@ -8,7 +8,7 @@ import time
 from math import ceil
 from argparse import ArgumentParser
 
-from github import Github, GithubException
+from github import Github, GithubException, Auth
 from urllib3 import Retry
 
 
@@ -55,7 +55,11 @@ def main():
         print("Please set `--user` or GH_USER environment variable to a valid GitHub user name.", file=sys.stderr)
         exit(1)
 
-    gh = Github(args.github_token, retry=config_retry()) if args.github_token else Github(retry=config_retry())
+    if args.github_token:
+        auth = Auth.Token(args.github_token)
+        gh = Github(auth=auth, retry=config_retry())
+    else:
+        gh = Github(retry=config_retry())
     
     try:
         user = gh.get_user(user)
